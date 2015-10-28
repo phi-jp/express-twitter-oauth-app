@@ -17,7 +17,7 @@ var SECRET = config.SECRET
 passport.use(new Strategy({
   consumerKey: TWITTER_CONSUMER_KEY,
   consumerSecret: TWITTER_CONSUMER_SECRET,
-  callbackURL: 'http://127.0.0.1:3000/login/twitter/return'
+  callbackURL: 'http://localhost:3000/login/twitter/callback'
 }, function(token, tokenSecret, profile, done) {
   return done(null, profile);
 }));
@@ -52,7 +52,7 @@ app.get('/login', function(req, res){
 
 app.get('/login/twitter', passport.authenticate('twitter'));
 
-app.get('/login/twitter/return',
+app.get('/login/twitter/callback',
   passport.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
