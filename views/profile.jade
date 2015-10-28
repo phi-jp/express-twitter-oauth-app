@@ -1,0 +1,26 @@
+extends ./layout
+
+block content
+  h1 Profile
+  if (!user)
+    p Welcome! Please 
+      a(href='/login') log in
+      | .
+  else 
+    p id: #{user.id}
+    p Username: #{user.username}
+    p Name: #{user.displayName}
+    p
+      img(src='#{user.photos[0].value}')
+    code
+      | !{JSON.stringify(user)}
+
+
+//- <p>
+//- ID: <%= user.id %><br/>
+//- Username: <%= user.username %><br/>
+//- Name: <%= user.displayName %><br/>
+//- <% if (user.emails) { %>
+//- Email: <%= user.emails[0].value %><br/>
+//- <% } %>
+//- </p>

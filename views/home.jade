@@ -1,0 +1,12 @@
+extends ./layout
+
+block content
+  h1 Home
+  if (!user)
+    p Welcome! Please 
+      a(href='/login') log in
+      | .
+  else 
+    p Hello, 
+      a(href='/profile') #{user.username}.
+
