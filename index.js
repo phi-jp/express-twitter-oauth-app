@@ -7,11 +7,16 @@ var passport = require('passport');
 var Strategy = require('passport-twitter').Strategy;
 var path = require('path');
 var app = express();
+var config = process.env.TWITTER_CONSUMER_KEY ? process.env : require('./config.js');
+
+var TWITTER_CONSUMER_KEY = config.TWITTER_CONSUMER_KEY;
+var TWITTER_CONSUMER_SECRET = config.TWITTER_CONSUMER_SECRET;
+var SECRET = config.SECRET
 
 // passport
 passport.use(new Strategy({
-  consumerKey: 'aaaaaaaaaaaaaaaa',
-  consumerSecret: 'bbbbbbbbbbbbbbbbbb',
+  consumerKey: TWITTER_CONSUMER_KEY,
+  consumerSecret: TWITTER_CONSUMER_SECRET,
   callbackURL: 'http://127.0.0.1:3000/login/twitter/return'
 }, function(token, tokenSecret, profile, done) {
   return done(null, profile);
@@ -30,7 +35,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'hogefoobar', resave: true, saveUninitialized: true }));
+app.use(require('express-session')({ secret: SECRET, resave: true, saveUninitialized: true }));
 
 // Init Passport and Session
 app.use(passport.initialize());
