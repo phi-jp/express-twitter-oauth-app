@@ -17,7 +17,7 @@ var SECRET = config.SECRET
 passport.use(new Strategy({
   consumerKey: TWITTER_CONSUMER_KEY,
   consumerSecret: TWITTER_CONSUMER_SECRET,
-  callbackURL: 'http://localhost:3000/login/twitter/callback'
+  callbackURL: '/login/twitter/callback'
 }, function(token, tokenSecret, profile, done) {
   return done(null, profile);
 }));
